@@ -1,26 +1,27 @@
 <template>
-  <nav class="nav">
-    <h1 class="nav__header">TO-DO List</h1>
-  </nav>
-  <task-list/>
+  <nav-menu/>
+  <task-list :tasks="tasks"/>
 </template>
 
 <script>
 import TaskList from '@/components/TaskList';
+import NavMenu from '@/components/NavMenu';
+import {mapState} from 'vuex';
 
 export default {
   name: 'HomeView',
   components: {
+    NavMenu,
     TaskList,
+  },
+  computed: {
+    ...mapState({
+      tasks: state => state.tasks
+    })
   }
 }
 </script>
 
 <style scoped>
-  .nav {
 
-  }
-  .nav__header {
-
-  }
 </style>

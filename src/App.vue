@@ -5,7 +5,7 @@
 </template>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 
 * {
   margin: 0;
@@ -13,7 +13,7 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #d8f3e3;
+  background-color: #e1eee3;
 }
 .app {
   display: flex;
@@ -22,7 +22,7 @@ body {
   align-items: center;
   width: 100%;
   text-align: center;
-  font-family: 'Righteous', cursive;
-  color: #056e57;
+  font-style: normal;
+  font-weight: normal;
 }
 </style>

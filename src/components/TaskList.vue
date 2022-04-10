@@ -1,22 +1,28 @@
 <template>
  <div class="task-list">
-   <task-info>Test task</task-info>
+   <task-item :task="task" :key="task.id" v-for="task in $props.tasks"/>
  </div>
 </template>
 
 <script>
-import TaskInfo from '@/components/TaskInfo';
+import TaskItem from '@/components/TaskItem';
 
 export default {
   name: 'TaskList',
   components: {
-    TaskInfo,
-  }
+    TaskItem,
+  },
+  props: {
+    tasks: {
+      type: Array,
+      required: true,
+    },
+  },
 }
 </script>
 
 <style scoped>
 .task-list {
-  width: 50%;
+  width: 70%;
 }
 </style>
