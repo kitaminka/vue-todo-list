@@ -1,14 +1,10 @@
 <template>
   <div class="list-item">
-		<div class="list-item__description">
-			<p v-if="task.completed">
-				<s>
-					{{task.description}}
-				</s>
-			</p>
-			<p v-else>
-				{{task.description}}
-			</p>
+		<div class="list-item__description list-item__description_completed" v-if="$props.task.completed">
+			{{task.description}}
+		</div>
+		<div class="list-item__description" v-else>
+			{{task.description}}
 		</div>
 		<div class="list-item__btns">
 			<app-button @click="$emit('complete', task)">
@@ -37,7 +33,7 @@ export default {
       type: Object,
       required: true,
     }
-  }
+  },
 }
 </script>
 <style scoped>
@@ -48,12 +44,14 @@ export default {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
 }
 .list-item__description {
 	color: #002493;
 	text-align: left;
-	width: 90%;
+}
+.list-item__description_completed {
+	color: green;
 }
 .list-item__btns {
 	width: 10%;

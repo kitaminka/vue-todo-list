@@ -18,6 +18,21 @@ export default createStore({
         completed: false,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
       },
+      {
+        id: 4,
+        completed: false,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
+      },
+      {
+        id: 5,
+        completed: false,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
+      },
+      {
+        id: 6,
+        completed: false,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
+      },
     ],
   },
   mutations: {

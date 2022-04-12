@@ -1,6 +1,6 @@
 <template>
   <task-list
-			:tasks="tasks"
+			:tasks="sortedTasks"
 			@complete="completeTask"
 	/>
 </template>
@@ -18,6 +18,9 @@ export default {
     ...mapState({
       tasks: state => state.tasks
     }),
+		sortedTasks() {
+			return [...this.tasks].sort((task) => task.completed ? -1 : 1);
+		}
   },
 	methods: {
 		...mapMutations({
@@ -26,7 +29,7 @@ export default {
 		completeTask(task) {
 			this.setTasks(this.tasks.map(t => t.id === task.id ? {...task, completed: true} : t));
 		},
-	}
+	},
 }
 </script>
 

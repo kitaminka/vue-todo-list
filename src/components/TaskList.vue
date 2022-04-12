@@ -1,11 +1,13 @@
 <template>
   <div class="task-list">
-    <task-list-item
-        v-for="task in tasks"
-        :task="task"
-        :key="task.id"
-				@complete="$emit('complete', task)"
-    />
+		<transition-group name="task-list">
+			<task-list-item
+					v-for="task in tasks"
+					:task="task"
+					:key="task.id"
+					@complete="$emit('complete', task)"
+			/>
+		</transition-group>
   </div>
 </template>
 
@@ -31,5 +33,8 @@ export default {
 	width: 100%;
 	max-width: 1000px;
 	margin-top: 10px;
+}
+.task-list-move {
+	transition: transform 0.4s ease;
 }
 </style>
