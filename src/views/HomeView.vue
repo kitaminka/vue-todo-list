@@ -1,24 +1,32 @@
 <template>
-  <nav-menu/>
-  <task-list :tasks="tasks"/>
+  <task-list
+			:tasks="tasks"
+			@complete="completeTask"
+	/>
 </template>
 
 <script>
+import {mapState, mapMutations} from 'vuex';
 import TaskList from '@/components/TaskList';
-import NavMenu from '@/components/NavMenu';
-import {mapState} from 'vuex';
 
 export default {
   name: 'HomeView',
   components: {
-    NavMenu,
-    TaskList,
-  },
+		TaskList
+	},
   computed: {
     ...mapState({
       tasks: state => state.tasks
-    })
-  }
+    }),
+  },
+	methods: {
+		...mapMutations({
+			setTasks: 'setTasks',
+		}),
+		completeTask(task) {
+			this.setTasks(this.tasks.map(t => t.id === task.id ? {...task, completed: true} : t));
+		},
+	}
 }
 </script>
 

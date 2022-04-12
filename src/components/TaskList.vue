@@ -1,16 +1,21 @@
 <template>
- <div class="task-list">
-   <task-item :task="task" :key="task.id" v-for="task in $props.tasks"/>
- </div>
+  <div class="task-list">
+    <task-list-item
+        v-for="task in tasks"
+        :task="task"
+        :key="task.id"
+				@complete="$emit('complete', task)"
+    />
+  </div>
 </template>
 
 <script>
-import TaskItem from '@/components/TaskItem';
+import TaskListItem from '@/components/TaskListItem';
 
 export default {
   name: 'TaskList',
   components: {
-    TaskItem,
+    TaskListItem,
   },
   props: {
     tasks: {
@@ -23,6 +28,8 @@ export default {
 
 <style scoped>
 .task-list {
-  width: 70%;
+	width: 100%;
+	max-width: 1000px;
+	margin-top: 10px;
 }
 </style>
