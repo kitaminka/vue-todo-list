@@ -1,5 +1,8 @@
 <template>
-  <button class="btn">
+	<button class="btn btn_active" v-if="$props.active">
+		<slot/>
+	</button>
+  <button class="btn" v-else>
 		<slot/>
   </button>
 </template>
@@ -7,6 +10,12 @@
 <script>
 export default {
   name: 'AppButton',
+	props: {
+		active: {
+			type: Boolean,
+			default: false,
+		}
+	}
 }
 </script>
 
@@ -22,9 +31,12 @@ export default {
 }
 .btn:hover {
 	cursor: pointer;
-	background-color: rgba(0, 36, 147, 0.1);
+	background-color: rgba(0, 36, 147, 0.3);
 }
 .btn:active {
-	background-color: rgba(0, 36, 147, 0.3);
+	background-color: rgba(0, 36, 147, 0.5);
+}
+.btn_active {
+	background-color: rgba(0, 128, 0, 0.3);
 }
 </style>

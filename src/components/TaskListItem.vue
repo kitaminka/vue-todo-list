@@ -7,7 +7,7 @@
 			{{task.description}}
 		</div>
 		<div class="list-item__btns">
-			<app-button @click="$emit('complete', task)">
+			<app-button @click="$emit('complete', task)" :active="task.completed">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
 			<app-button>
