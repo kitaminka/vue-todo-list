@@ -1,13 +1,10 @@
 <template>
   <div class="list-item">
-		<div class="list-item__description list-item__description_completed" v-if="$props.task.completed">
-			{{task.description}}
-		</div>
-		<div class="list-item__description" v-else>
+		<div class="list-item__description" :class="{completed: task.completed}">
 			{{task.description}}
 		</div>
 		<div class="list-item__btns">
-			<app-button @click="$emit('complete', task)" :active="task.completed">
+			<app-button @click="$emit('complete', task)" :class="{active: task.completed}">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
 			<app-button>
@@ -50,7 +47,7 @@ export default {
 	color: #002493;
 	text-align: left;
 }
-.list-item__description_completed {
+.completed {
 	color: green;
 }
 .list-item__btns {

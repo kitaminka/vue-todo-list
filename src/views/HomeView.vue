@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex';
+import {mapState} from 'vuex';
 import TaskList from '@/components/TaskList';
 
 export default {
@@ -23,12 +23,6 @@ export default {
 		}
   },
 	methods: {
-		...mapMutations({
-			setTasks: 'setTasks',
-		}),
-		completeTask(task) {
-			this.setTasks(this.tasks.map(t => t.id === task.id ? {...task, completed: true} : t));
-		},
 	},
 }
 </script>

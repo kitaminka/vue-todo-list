@@ -35,9 +35,4 @@ export default createStore({
       },
     ],
   },
-  mutations: {
-    setTasks(state, tasks) {
-      state.tasks = tasks;
-    },
-  },
 })
