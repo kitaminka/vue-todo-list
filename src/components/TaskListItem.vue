@@ -4,7 +4,7 @@
 			{{task.description}}
 		</div>
 		<div class="list-item__btns">
-			<app-button @click="$emit('complete', task)" :class="{active: task.completed}">
+			<app-button @click="toggleTaskStatus(task)" :class="{active: task.completed}">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
 			<app-button>
@@ -19,6 +19,7 @@
 
 <script>
 import AppButton from '@/components/AppButton';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'TaskListItem',
@@ -31,6 +32,11 @@ export default {
       required: true,
     }
   },
+	methods: {
+		...mapActions({
+			toggleTaskStatus: 'toggleTaskStatus'
+		}),
+	}
 }
 </script>
 <style scoped>

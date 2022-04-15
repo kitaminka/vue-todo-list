@@ -32,7 +32,32 @@ export default createStore({
         id: 6,
         completed: false,
         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
-      },
-    ],
+      }
+    ]
   },
+  getters: {
+    getSortedTasks(state) {
+      return [...state.tasks].sort((task) => task.completed ? -1 : 1);
+    }
+  },
+  mutations: {
+    changeTaskStatus(state, payload) {
+      state.tasks.find((t) => t.id === payload?.task.id).completed = payload?.completed;
+    }
+  },
+  actions: {
+    toggleTaskStatus({commit}, task) {
+      if (task.completed) {
+        commit('changeTaskStatus', {
+          task,
+          completed: false
+        });
+      } else {
+        commit('changeTaskStatus', {
+          task,
+          completed: true
+        });
+      }
+    }
+  }
 })

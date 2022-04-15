@@ -5,7 +5,6 @@
 					v-for="task in tasks"
 					:task="task"
 					:key="task.id"
-					@complete="$emit('complete', task)"
 			/>
 		</transition-group>
   </div>
