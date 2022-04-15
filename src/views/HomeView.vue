@@ -1,18 +1,22 @@
 <template>
   <task-list :tasks="sortedTasks"/>
-	<app-input></app-input>
+	<app-dialog>
+		<task-form />
+	</app-dialog>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
 import TaskList from '@/components/TaskList';
-import AppInput from '@/components/AppInput';
+import AppDialog from '@/components/AppDialog';
+import TaskForm from '@/components/TaskForm';
 
 export default {
   name: 'HomeView',
   components: {
-		AppInput,
-		TaskList
+		AppDialog,
+		TaskList,
+		TaskForm
 	},
   computed: {
     ...mapGetters({

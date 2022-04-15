@@ -18,13 +18,14 @@ export default {
 
 <style scoped>
 .btn {
-	margin: 5px;
 	background: none;
 	border: 2px #002493 solid;
 	border-radius: 5px;
 	padding: 5px;
 	transition: background-color 0.2s;
 	color: #002493;
+	font-size: 15px;
+	font-family: "Libre Franklin", sans-serif;
 	cursor: pointer;
 }
 

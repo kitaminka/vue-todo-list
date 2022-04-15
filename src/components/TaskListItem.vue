@@ -3,14 +3,14 @@
 		<div class="list-item__description" :class="{completed: task.completed}">
 			{{task.description}}
 		</div>
-		<div class="list-item__btns">
-			<app-button @click="toggleTaskStatus(task)" variant="success">
+		<div class="list-item__control-btns">
+			<app-button @click="toggleTaskStatus(task)" variant="success" class="control-btns__btn">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
-			<app-button>
+			<app-button class="control-btns__btn">
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
-			<app-button variant="delete">
+			<app-button variant="delete" class="control-btns__btn">
 				<img src="../assets/delete.svg" alt="Delete">
 			</app-button>
 		</div>
@@ -57,12 +57,15 @@ export default {
 .completed {
 	color: green;
 }
-.list-item__btns {
+.list-item__control-btns{
 	width: 10%;
 	min-width: 150px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+}
+.control-btns__btn {
+	margin: 5px;
 }
 
 @media (max-width: 900px) {

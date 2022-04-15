@@ -21,6 +21,7 @@ export default {
 	border-radius: 5px;
 	padding: 5px;
 	transition: background-color 0.2s;
+	font-size: 15px;
 	font-family: "Libre Franklin", sans-serif;
 	color: #002493;
 	outline: none;
