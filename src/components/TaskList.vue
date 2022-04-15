@@ -16,14 +16,14 @@ import TaskListItem from '@/components/TaskListItem';
 export default {
   name: 'TaskList',
   components: {
-    TaskListItem,
+    TaskListItem
   },
   props: {
     tasks: {
       type: Array,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>
 

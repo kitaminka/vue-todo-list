@@ -1,5 +1,5 @@
 <template>
-	<button class="btn">
+	<button class="btn" :class="variant">
 		<slot/>
 	</button>
 </template>
@@ -7,6 +7,12 @@
 <script>
 export default {
   name: 'AppButton',
+	props: {
+		variant: {
+			type: String,
+			default: 'default'
+		}
+	}
 }
 </script>
 
@@ -19,15 +25,25 @@ export default {
 	padding: 5px;
 	transition: background-color 0.2s;
 	color: #002493;
-}
-.btn:hover {
 	cursor: pointer;
+}
+
+.default:hover {
+	background-color: rgba(0, 36, 147, 0.1);
+}
+.default:active {
 	background-color: rgba(0, 36, 147, 0.3);
 }
-.btn:active {
-	background-color: rgba(0, 36, 147, 0.5);
+.success:hover {
+	background-color: rgba(20, 147, 0, 0.1);
 }
-.active {
-	background-color: rgba(0, 128, 0, 0.3);
+.success:active {
+	background-color: rgba(20, 147, 0, 0.3);
+}
+.delete:hover {
+	background-color: rgba(147, 0, 0, 0.10);
+}
+.delete:active {
+	background-color: rgba(147, 0, 0, 0.30);
 }
 </style>

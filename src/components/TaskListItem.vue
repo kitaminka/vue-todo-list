@@ -4,13 +4,13 @@
 			{{task.description}}
 		</div>
 		<div class="list-item__btns">
-			<app-button @click="toggleTaskStatus(task)" :class="{active: task.completed}">
+			<app-button @click="toggleTaskStatus(task)" variant="success">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
 			<app-button>
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
-			<app-button>
+			<app-button variant="delete">
 				<img src="../assets/delete.svg" alt="Delete">
 			</app-button>
 		</div>
@@ -24,21 +24,22 @@ import { mapActions } from 'vuex';
 export default {
   name: 'TaskListItem',
 	components: {
-		AppButton,
+		AppButton
 	},
   props: {
     task: {
       type: Object,
-      required: true,
+      required: true
     }
   },
 	methods: {
 		...mapActions({
 			toggleTaskStatus: 'toggleTaskStatus'
-		}),
+		})
 	}
 }
 </script>
+
 <style scoped>
 .list-item {
 	margin: 5px 10px;
