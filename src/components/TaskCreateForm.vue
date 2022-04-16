@@ -1,6 +1,6 @@
 <template>
 	<form class="form" @submit.prevent>
-		<h2 class="form__header">Create task</h2>
+		<h3 class="form__header">Create task</h3>
 		<app-input class="form__input" v-model="task.description" placeholder="Task description" @focus="clearError"></app-input>
 		<p v-if="error" class="form__error">{{error}}</p>
 		<app-button type="submit" @click="createTask">Create</app-button>

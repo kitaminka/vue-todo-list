@@ -1,13 +1,14 @@
 <template>
   <div class="list-item">
-		<div class="list-item__description" :class="{completed: task.completed}">
+		<app-input class="list-item__input" v-if="editing" :model-value="task.description" @focusout="editDescriptionInput" @keydown.enter="editDescriptionInput" placeholder="Task description"/>
+		<div v-else class="list-item__description" :class="{completed: task.completed}">
 			{{task.description}}
 		</div>
 		<div class="list-item__control-btns">
 			<app-button @click="toggleTaskStatus(task)" variant="success" class="control-btns__btn">
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
-			<app-button class="control-btns__btn">
+			<app-button class="control-btns__btn" @click="editing = true">
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
 			<app-button variant="delete" class="control-btns__btn">
@@ -20,11 +21,18 @@
 <script>
 import AppButton from '@/components/AppButton';
 import { mapActions } from 'vuex';
+import AppInput from '@/components/AppInput';
 
 export default {
   name: 'TaskListItem',
 	components: {
+		AppInput,
 		AppButton
+	},
+	data() {
+		return {
+			editing: false,
+		}
 	},
   props: {
     task: {
@@ -34,8 +42,16 @@ export default {
   },
 	methods: {
 		...mapActions({
+			editTaskDescription: 'editTaskDescription',
 			toggleTaskStatus: 'toggleTaskStatus'
-		})
+		}),
+		editDescriptionInput(event) {
+			this.editTaskDescription({
+				...this.task,
+				description: event.target.value
+			});
+			this.editing = false;
+		}
 	}
 }
 </script>
@@ -49,6 +65,10 @@ export default {
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
+}
+.list-item__input {
+	width: 100%;
+	font-size: 16px;
 }
 .list-item__description {
 	color: #002493;
@@ -72,9 +92,6 @@ export default {
 	.list-item {
 		margin: 20px 10px;
 		flex-direction: column;
-	}
-	.list-item__description {
-		font-size: 15px;
 	}
 }
 </style>

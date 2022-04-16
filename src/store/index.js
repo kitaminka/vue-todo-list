@@ -2,38 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    tasks: [
-      {
-        id: 1,
-        completed: false,
-        description: 'Test task: create To-Do list'
-      },
-      {
-        id: 2,
-        completed: true,
-        description: 'Learn Vue.js'
-      },
-      {
-        id: 3,
-        completed: false,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
-      },
-      {
-        id: 4,
-        completed: false,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
-      },
-      {
-        id: 5,
-        completed: false,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
-      },
-      {
-        id: 6,
-        completed: false,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae deleniti esse est exercitationem ipsam, molestiae nisi numquam perspiciatis vero. Ab aut cum eius libero magni nulla officia soluta ullam? '
-      }
-    ]
+    tasks: []
   },
   getters: {
     getSortedTasks(state) {
@@ -44,13 +13,22 @@ export default createStore({
     createTask(state, payload) {
       state.tasks.push(payload);
     },
+    editTaskDescription(state, payload) {
+      state.tasks.find((t) => t.id === payload?.id).description = payload.description;
+    },
     changeTaskStatus(state, payload) {
       state.tasks.find((t) => t.id === payload?.task.id).completed = payload?.completed;
+    },
+    clearList(state) {
+      state.tasks = [];
     }
   },
   actions: {
     createTask({commit}, task) {
       commit('createTask', task);
+    },
+    editTaskDescription({commit}, task) {
+      commit('editTaskDescription', task);
     },
     toggleTaskStatus({commit}, task) {
       if (task.completed) {
@@ -64,6 +42,9 @@ export default createStore({
           completed: true
         });
       }
+    },
+    clearList({commit}) {
+      commit('clearList');
     }
   }
 })
