@@ -11,7 +11,7 @@
 			<app-button class="control-btns__btn" @click="editing = true">
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
-			<app-button variant="delete" class="control-btns__btn">
+			<app-button variant="delete" class="control-btns__btn" @click="deleteTask(task)">
 				<img src="../assets/delete.svg" alt="Delete">
 			</app-button>
 		</div>
@@ -44,7 +44,8 @@ export default {
 	methods: {
 		...mapActions({
 			editTaskDescription: 'editTaskDescription',
-			toggleTaskStatus: 'toggleTaskStatus'
+			toggleTaskStatus: 'toggleTaskStatus',
+			deleteTask: 'deleteTask'
 		}),
 		editDescriptionInput() {
 			this.editTaskDescription({

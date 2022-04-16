@@ -1,7 +1,7 @@
 <template>
-	<control-panel @showDialog="showDialog"/>
+	<control-panel @showDialog="this.createTaskDialogShow = true"/>
   <task-list :tasks="sortedTasks"/>
-	<app-dialog v-model:show="dialogShow">
+	<app-dialog v-model:show="createTaskDialogShow">
 		<task-create-form @createTask="createTaskForm"/>
 	</app-dialog>
 </template>
@@ -23,22 +23,16 @@ export default {
 	},
 	data() {
 		return {
-			dialogShow : false,
+			createTaskDialogShow: false,
 		}
 	},
 	methods: {
 		...mapActions({
 			createTask: 'createTask'
 		}),
-		showDialog() {
-			this.dialogShow = true;
-		},
-		hideDialog() {
-			this.dialogShow = false;
-		},
 		createTaskForm(task) {
 			this.createTask(task);
-			this.hideDialog();
+			this.createTaskDialogShow = false;
 		}
 	},
   computed: {

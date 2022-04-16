@@ -1,6 +1,6 @@
 <template>
-	<div class="dialog" v-if="show" @click.stop="hideDialog">
-		<div class="dialog__window" @click.stop>
+	<div class="dialog" v-if="show">
+		<div class="dialog__window">
 			<div class="window__close" @click="hideDialog">
 				<img src="../assets/close.svg" alt="Close">
 			</div>

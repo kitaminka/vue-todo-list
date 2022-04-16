@@ -10,14 +10,17 @@ export default createStore({
     }
   },
   mutations: {
-    createTask(state, payload) {
-      state.tasks.push(payload);
+    createTask(state, task) {
+      state.tasks.push(task);
     },
-    editTaskDescription(state, payload) {
-      state.tasks.find((t) => t.id === payload?.id).description = payload.description;
+    editTaskDescription(state, {task, description}) {
+      state.tasks.find((t) => t.id === task.id).description = description;
     },
     changeTaskStatus(state, {task, completed}) {
       state.tasks.find((t) => t.id === task.id).completed = completed;
+    },
+    deleteTask(state, task) {
+      state.tasks.splice(state.tasks.indexOf(task), 1);
     },
     clearList(state) {
       state.tasks = [];
@@ -42,6 +45,9 @@ export default createStore({
           completed: true
         });
       }
+    },
+    deleteTask({commit}, task) {
+      commit('deleteTask', task)
     },
     clearList({commit}) {
       commit('clearList');
