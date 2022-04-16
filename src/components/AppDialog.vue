@@ -1,10 +1,12 @@
 <template>
-	<div class="dialog">
-		<div class="dialog__content">
-			<div class="dialog__close">
+	<div class="dialog" v-if="show" @click.stop="hideDialog">
+		<div class="dialog__window" @click.stop>
+			<div class="window__close" @click="hideDialog">
 				<img src="../assets/close.svg" alt="Close">
 			</div>
-			<slot />
+			<div class="window__content">
+				<slot />
+			</div>
 		</div>
 	</div>
 </template>
@@ -12,8 +14,16 @@
 <script>
 export default {
 	name: 'AppDialog',
-	components: {
-
+	props: {
+		show: {
+			type: Boolean,
+			default: false
+		}
+	},
+	methods: {
+		hideDialog() {
+			this.$emit('update:show', false)
+		}
 	}
 }
 </script>
@@ -25,20 +35,25 @@ export default {
 	right: 0;
 	left: 0;
 	position: absolute;
+	background: rgba(0, 0, 0, 0.3);
 	display: flex;
 }
-.dialog__content {
+.dialog__window {
 	margin: auto;
 	display: flex;
 	flex-direction: column;
-	padding: 50px;
+	padding: 10px 20px;
 	background-color: #eeffff;
 	border: 2px #002493 solid;
 	border-radius: 5px;
 }
-.dialog__close {
-	position: fixed;
+.window__close {
 	border: none;
+	align-self: flex-end;
 	cursor: pointer;
+	margin-bottom: 10px;
+}
+.window__content {
+	margin-bottom: 10px;
 }
 </style>

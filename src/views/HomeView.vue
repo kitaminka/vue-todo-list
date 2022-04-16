@@ -1,12 +1,13 @@
 <template>
+
   <task-list :tasks="sortedTasks"/>
-	<app-dialog>
-		<task-form />
+	<app-dialog v-model:show="dialogShow">
+		<task-form @createTask="createTaskForm"/>
 	</app-dialog>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TaskList from '@/components/TaskList';
 import AppDialog from '@/components/AppDialog';
 import TaskForm from '@/components/TaskForm';
@@ -17,6 +18,20 @@ export default {
 		AppDialog,
 		TaskList,
 		TaskForm
+	},
+	data() {
+		return {
+			dialogShow : true,
+		}
+	},
+	methods: {
+		...mapActions({
+			createTask: 'createTask'
+		}),
+		createTaskForm(task) {
+			this.createTask(task);
+			this.dialogShow = false;
+		}
 	},
   computed: {
     ...mapGetters({

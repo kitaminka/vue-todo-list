@@ -74,7 +74,6 @@ export default {
 		flex-direction: column;
 	}
 	.list-item__description {
-		text-align: center;
 		font-size: 15px;
 	}
 }

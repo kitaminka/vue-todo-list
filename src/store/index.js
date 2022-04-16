@@ -41,11 +41,17 @@ export default createStore({
     }
   },
   mutations: {
+    createTask(state, payload) {
+      state.tasks.push(payload);
+    },
     changeTaskStatus(state, payload) {
       state.tasks.find((t) => t.id === payload?.task.id).completed = payload?.completed;
     }
   },
   actions: {
+    createTask({commit}, task) {
+      commit('createTask', task);
+    },
     toggleTaskStatus({commit}, task) {
       if (task.completed) {
         commit('changeTaskStatus', {
