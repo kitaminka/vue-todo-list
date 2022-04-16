@@ -1,7 +1,12 @@
 <template>
 	<div class="control-panel">
 		<app-button class="control-panel__btn" @click="$emit('showDialog')">Create task</app-button>
-		<app-button class="control-panel__btn" @click="this.confirmationDialogShow = true" variant="delete">Clear list</app-button>
+		<app-button
+				class="control-panel__btn"
+				@click="this.confirmationDialogShow = true"
+				variant="delete"
+				v-if="tasks.length > 0"
+		>Clear list</app-button>
 		<app-dialog v-model:show="confirmationDialogShow">
 			<confirmation-form @confirm="clearListConfirm" @cancel="this.confirmationDialogShow = false" :message="'Remove all tasks from the list?'" />
 		</app-dialog>
@@ -10,7 +15,7 @@
 
 <script>
 import AppButton from '@/components/AppButton';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import ConfirmationForm from '@/components/ConfirmationForm';
 import AppDialog from '@/components/AppDialog';
 
@@ -25,6 +30,11 @@ export default {
 		return {
 			confirmationDialogShow: false,
 		}
+	},
+	computed: {
+		...mapState({
+			tasks: state => state.tasks
+		})
 	},
 	methods: {
 		...mapActions({
@@ -43,10 +53,9 @@ export default {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: row;
-	width: 250px;
-	justify-content: space-between;
+	justify-content: center;
 }
 .control-panel__btn {
-	font-size: 18px;
+	margin: 0 10px;
 }
 </style>

@@ -7,7 +7,9 @@
 					:key="task.id"
 			/>
 		</transition-group>
-		<h3 class="task-list__message" v-else>Your To-Do list is empty. Create first task!</h3>
+		<h3 class="task-list__message" v-else>
+			Your To-Do list is empty. Create first task!
+		</h3>
   </div>
 </template>
 

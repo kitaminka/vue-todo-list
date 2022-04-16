@@ -1,17 +1,38 @@
 <template>
   <div class="list-item">
-		<app-input class="list-item__input" v-if="editing" v-model="inputDescription" @focusout="editDescriptionInput" @keydown.enter="editDescriptionInput" placeholder="Task description"/>
-		<div v-else class="list-item__description" :class="{completed: task.completed}">
+		<app-input
+				class="list-item__input"
+				v-if="editing"
+				v-model="inputDescription"
+				@focusout="editDescriptionInput"
+				@keydown.enter="editDescriptionInput"
+				placeholder="Task description"
+		/>
+		<div
+				v-else class="list-item__description"
+				:class="{completed: task.completed}"
+		>
 			{{task.description}}
 		</div>
 		<div class="list-item__control-btns">
-			<app-button @click="toggleTaskStatus(task)" variant="success" class="control-btns__btn">
+			<app-button
+					@click="toggleTaskStatus(task)"
+					variant="success"
+					class="control-btns__btn"
+			>
 				<img src="../assets/complete.svg" alt="Complete">
 			</app-button>
-			<app-button class="control-btns__btn" @click="editing = true">
+			<app-button
+					class="control-btns__btn"
+					@click="this.editing = true"
+			>
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
-			<app-button variant="delete" class="control-btns__btn" @click="deleteTask(task)">
+			<app-button
+					variant="delete"
+					class="control-btns__btn"
+					@click="deleteTask(task)"
+			>
 				<img src="../assets/delete.svg" alt="Delete">
 			</app-button>
 		</div>
@@ -48,10 +69,14 @@ export default {
 			deleteTask: 'deleteTask'
 		}),
 		editDescriptionInput() {
-			this.editTaskDescription({
-				task: this.task,
-				description: this.inputDescription
-			});
+			if (this.inputDescription.length > 0) {
+				this.editTaskDescription({
+					task: this.task,
+					description: this.inputDescription
+				});
+			} else {
+				this.inputDescription = this.task.description
+			}
 			this.editing = false;
 		}
 	}
