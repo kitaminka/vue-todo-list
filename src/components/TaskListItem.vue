@@ -1,6 +1,6 @@
 <template>
   <div class="list-item">
-		<app-input class="list-item__input" v-if="editing" :model-value="task.description" @focusout="editDescriptionInput" @keydown.enter="editDescriptionInput" placeholder="Task description"/>
+		<app-input class="list-item__input" v-if="editing" v-model="inputDescription" @focusout="editDescriptionInput" @keydown.enter="editDescriptionInput" placeholder="Task description"/>
 		<div v-else class="list-item__description" :class="{completed: task.completed}">
 			{{task.description}}
 		</div>
@@ -32,6 +32,7 @@ export default {
 	data() {
 		return {
 			editing: false,
+			inputDescription: this.task.description
 		}
 	},
   props: {
@@ -45,10 +46,10 @@ export default {
 			editTaskDescription: 'editTaskDescription',
 			toggleTaskStatus: 'toggleTaskStatus'
 		}),
-		editDescriptionInput(event) {
+		editDescriptionInput() {
 			this.editTaskDescription({
-				...this.task,
-				description: event.target.value
+				task: this.task,
+				description: this.inputDescription
 			});
 			this.editing = false;
 		}

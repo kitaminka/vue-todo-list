@@ -16,8 +16,8 @@ export default createStore({
     editTaskDescription(state, payload) {
       state.tasks.find((t) => t.id === payload?.id).description = payload.description;
     },
-    changeTaskStatus(state, payload) {
-      state.tasks.find((t) => t.id === payload?.task.id).completed = payload?.completed;
+    changeTaskStatus(state, {task, completed}) {
+      state.tasks.find((t) => t.id === task.id).completed = completed;
     },
     clearList(state) {
       state.tasks = [];
@@ -27,8 +27,8 @@ export default createStore({
     createTask({commit}, task) {
       commit('createTask', task);
     },
-    editTaskDescription({commit}, task) {
-      commit('editTaskDescription', task);
+    editTaskDescription({commit}, {task, description}) {
+      commit('editTaskDescription', {task, description});
     },
     toggleTaskStatus({commit}, task) {
       if (task.completed) {
