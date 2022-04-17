@@ -40,7 +40,16 @@ export default {
 	color: #002493;
 	text-align: center;
 }
+.task-list-enter-active,
+.task-list-leave-active {
+	transition: all 0.5s ease;
+}
+.task-list-enter-from,
+.task-list-leave-to {
+	opacity: 0;
+	transform: translateX(20px);
+}
 .task-list-move {
-	transition: transform 0.4s ease;
+	transition: transform 0.5s ease;
 }
 </style>
