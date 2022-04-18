@@ -2,11 +2,15 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    tasks: []
+    tasks: [],
+    editableTaskId: null
   },
   getters: {
     getSortedTasks(state) {
       return [...state.tasks].sort((task) => task.completed ? -1 : 1);
+    },
+    getEditableTaskId(state) {
+      return state.editableTaskId;
     }
   },
   mutations: {
@@ -24,6 +28,9 @@ export default createStore({
     },
     clearList(state) {
       state.tasks = [];
+    },
+    setEditableTaskId(state, taskId) {
+      state.editableTaskId = taskId;
     }
   },
   actions: {
@@ -51,6 +58,9 @@ export default createStore({
     },
     clearList({commit}) {
       commit('clearList');
+    },
+    setEditableTaskId({commit}, taskId) {
+      commit('setEditableTaskId', taskId);
     }
   }
 })

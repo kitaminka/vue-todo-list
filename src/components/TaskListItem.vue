@@ -2,14 +2,14 @@
   <div class="list-item">
 		<app-input
 				class="list-item__input"
-				v-if="editing"
+				v-if="editableTaskId === task.id"
 				v-model="inputDescription"
-				@focusout="editDescriptionInput"
-				@keydown.enter="editDescriptionInput"
+				@keydown.enter="toggleEditing"
 				placeholder="Task description"
 		/>
 		<div
-				v-else class="list-item__description"
+				v-else
+				class="list-item__description"
 				:class="{completed: task.completed}"
 		>
 			{{task.description}}
@@ -24,7 +24,7 @@
 			</app-button>
 			<app-button
 					class="control-btns__btn"
-					@click="this.editing = true"
+					@click="toggleEditing"
 			>
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
@@ -41,7 +41,7 @@
 
 <script>
 import AppButton from '@/components/AppButton';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import AppInput from '@/components/AppInput';
 
 export default {
@@ -57,27 +57,37 @@ export default {
 		}
 	},
   props: {
-    task: {
-      type: Object,
-      required: true
-    }
+    task: Object
   },
-	methods: {
-		...mapActions({
-			editTaskDescription: 'editTaskDescription',
-			toggleTaskStatus: 'toggleTaskStatus',
-			deleteTask: 'deleteTask'
-		}),
-		editDescriptionInput() {
-			if (this.inputDescription.length > 0) {
+	computed: {
+		...mapGetters({
+			editableTaskId: 'getEditableTaskId'
+		})
+	},
+	watch: {
+		inputDescription(newInputDescription) {
+			if (newInputDescription.length > 0) {
 				this.editTaskDescription({
 					task: this.task,
 					description: this.inputDescription
 				});
-			} else {
-				this.inputDescription = this.task.description
 			}
-			this.editing = false;
+		}
+	},
+	methods: {
+		...mapActions({
+			editTaskDescription: 'editTaskDescription',
+			toggleTaskStatus: 'toggleTaskStatus',
+			deleteTask: 'deleteTask',
+			setEditableTaskId: 'setEditableTaskId'
+		}),
+		toggleEditing() {
+			if (this.editableTaskId === this.task.id) {
+				this.setEditableTaskId(null);
+			} else {
+				this.inputDescription = this.task.description;
+				this.setEditableTaskId(this.task.id);
+			}
 		}
 	}
 }

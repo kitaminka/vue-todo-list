@@ -5,7 +5,7 @@
 				class="control-panel__btn"
 				@click="this.confirmationDialogShow = true"
 				variant="delete"
-				v-if="tasks.length > 0"
+				v-if="sortedTasks.length > 0"
 		>Clear list</app-button>
 		<app-dialog v-model:show="confirmationDialogShow">
 			<confirmation-form @confirm="clearListConfirm" @cancel="this.confirmationDialogShow = false" :message="'Remove all tasks from the list?'" />
@@ -15,7 +15,7 @@
 
 <script>
 import AppButton from '@/components/AppButton';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import ConfirmationForm from '@/components/ConfirmationForm';
 import AppDialog from '@/components/AppDialog';
 
@@ -32,8 +32,8 @@ export default {
 		}
 	},
 	computed: {
-		...mapState({
-			tasks: state => state.tasks
+		...mapGetters({
+			sortedTasks: 'getSortedTasks'
 		})
 	},
 	methods: {

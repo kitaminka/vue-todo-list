@@ -22,10 +22,7 @@ export default {
     TaskListItem
   },
   props: {
-    tasks: {
-      type: Array,
-      required: true
-    }
+    tasks: Array
   }
 }
 </script>
