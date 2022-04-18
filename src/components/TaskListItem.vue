@@ -1,5 +1,6 @@
 <template>
   <div class="list-item">
+		<!--	TODO Add checkbox for completing task   -->
 		<app-input
 				ref="editInput"
 				class="list-item__input"
