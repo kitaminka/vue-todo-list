@@ -12,12 +12,11 @@
 import AppButton from '@/components/AppButton';
 export default {
 	name: 'ConfirmationForm',
-	components: {AppButton},
+	components: {
+		AppButton
+	},
 	props: {
-		message: {
-			type: String,
-			required: true
-		}
+		message: String
 	}
 }
 </script>

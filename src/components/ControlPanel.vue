@@ -1,14 +1,30 @@
 <template>
 	<div class="control-panel">
-		<app-button class="control-panel__btn" @click="$emit('showDialog')">Create task</app-button>
 		<app-button
 				class="control-panel__btn"
-				@click="this.confirmationDialogShow = true"
+				@click="showCreateTaskDialog"
+		>
+			Create task
+		</app-button>
+		<app-button
+				class="control-panel__btn"
+				@click="showConfirmationDialog"
 				variant="delete"
 				v-if="sortedTasks.length > 0"
-		>Clear list</app-button>
+		>
+			Clear list
+		</app-button>
 		<app-dialog v-model:show="confirmationDialogShow">
-			<confirmation-form @confirm="clearListConfirm" @cancel="this.confirmationDialogShow = false" :message="'Remove all tasks from the list?'" />
+			<confirmation-form
+					@confirm="clearListConfirm"
+					@cancel="this.confirmationDialogShow = false"
+					:message="'Remove all tasks from the list?'"
+			/>
+		</app-dialog>
+		<app-dialog v-model:show="createTaskDialogShow">
+			<task-create-form
+					@createTask="createTaskForm"
+			/>
 		</app-dialog>
 	</div>
 </template>
@@ -18,17 +34,20 @@ import AppButton from '@/components/AppButton';
 import { mapActions, mapGetters } from 'vuex';
 import ConfirmationForm from '@/components/ConfirmationForm';
 import AppDialog from '@/components/AppDialog';
+import TaskCreateForm from '@/components/TaskCreateForm';
 
 export default {
 	name: 'ControlPanel',
 	components: {
 		ConfirmationForm,
 		AppButton,
-		AppDialog
+		AppDialog,
+		TaskCreateForm
 	},
 	data() {
 		return {
-			confirmationDialogShow: false,
+			createTaskDialogShow: false,
+			confirmationDialogShow: false
 		}
 	},
 	computed: {
@@ -38,11 +57,25 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			clearList: 'clearList'
+			clearList: 'clearList',
+			clearEditableTask: 'clearEditableTask',
+			createTask: 'createTask'
 		}),
+		showConfirmationDialog() {
+			this.clearEditableTask();
+			this.confirmationDialogShow = true;
+		},
+		showCreateTaskDialog() {
+			this.clearEditableTask();
+			this.createTaskDialogShow = true;
+		},
 		clearListConfirm() {
 			this.clearList();
 			this.confirmationDialogShow = false
+		},
+		createTaskForm(task) {
+			this.createTask(task);
+			this.createTaskDialogShow = false;
 		}
 	}
 }

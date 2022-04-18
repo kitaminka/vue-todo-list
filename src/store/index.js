@@ -3,14 +3,14 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     tasks: [],
-    editableTaskId: null
+    editableTask: null
   },
   getters: {
     getSortedTasks(state) {
       return [...state.tasks].sort((task) => task.completed ? -1 : 1);
     },
-    getEditableTaskId(state) {
-      return state.editableTaskId;
+    getEditableTask(state) {
+      return state.editableTask;
     }
   },
   mutations: {
@@ -29,8 +29,8 @@ export default createStore({
     clearList(state) {
       state.tasks = [];
     },
-    setEditableTaskId(state, taskId) {
-      state.editableTaskId = taskId;
+    setEditableTask(state, taskId) {
+      state.editableTask = taskId;
     }
   },
   actions: {
@@ -54,13 +54,16 @@ export default createStore({
       }
     },
     deleteTask({commit}, task) {
-      commit('deleteTask', task)
+      commit('deleteTask', task);
     },
     clearList({commit}) {
       commit('clearList');
     },
-    setEditableTaskId({commit}, taskId) {
-      commit('setEditableTaskId', taskId);
+    setEditableTask({commit}, taskId) {
+      commit('setEditableTask', taskId);
+    },
+    clearEditableTask({commit}) {
+      commit('setEditableTask', null);
     }
   }
 })

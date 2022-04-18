@@ -2,6 +2,7 @@
 	<form class="form" @submit.prevent>
 		<h3 class="form__header">Create task</h3>
 		<app-input
+				ref="descriptionInput"
 				class="form__input"
 				v-model="task.description"
 				placeholder="Task description"
@@ -29,6 +30,9 @@ export default {
 			},
 			error: ''
 		}
+	},
+	mounted() {
+		this.$refs.descriptionInput.$el.focus();
 	},
 	methods: {
 		createTask() {

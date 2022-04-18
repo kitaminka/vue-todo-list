@@ -1,8 +1,9 @@
 <template>
   <div class="list-item">
 		<app-input
+				ref="editInput"
 				class="list-item__input"
-				v-if="editableTaskId === task.id"
+				v-if="editableTask === task.id"
 				v-model="inputDescription"
 				@keydown.enter="toggleEditing"
 				placeholder="Task description"
@@ -16,7 +17,7 @@
 		</div>
 		<div class="list-item__control-btns">
 			<app-button
-					@click="toggleTaskStatus(task)"
+					@click="toggleStatusButton"
 					variant="success"
 					class="control-btns__btn"
 			>
@@ -42,6 +43,7 @@
 <script>
 import AppButton from '@/components/AppButton';
 import { mapActions, mapGetters } from 'vuex';
+import { nextTick } from 'vue';
 import AppInput from '@/components/AppInput';
 
 export default {
@@ -61,7 +63,7 @@ export default {
   },
 	computed: {
 		...mapGetters({
-			editableTaskId: 'getEditableTaskId'
+			editableTask: 'getEditableTask'
 		})
 	},
 	watch: {
@@ -79,14 +81,22 @@ export default {
 			editTaskDescription: 'editTaskDescription',
 			toggleTaskStatus: 'toggleTaskStatus',
 			deleteTask: 'deleteTask',
-			setEditableTaskId: 'setEditableTaskId'
+			setEditableTask: 'setEditableTask',
+			clearEditableTask: 'clearEditableTask'
 		}),
+		toggleStatusButton() {
+			this.clearEditableTask();
+			this.toggleTaskStatus(this.task);
+		},
 		toggleEditing() {
-			if (this.editableTaskId === this.task.id) {
-				this.setEditableTaskId(null);
+			if (this.editableTask === this.task.id) {
+				this.clearEditableTask();
 			} else {
 				this.inputDescription = this.task.description;
-				this.setEditableTaskId(this.task.id);
+				this.setEditableTask(this.task.id);
+				nextTick(() => {
+					this.$refs.editInput.$el.focus();
+				});
 			}
 		}
 	}
