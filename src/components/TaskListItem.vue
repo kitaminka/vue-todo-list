@@ -26,14 +26,14 @@
 			</app-button>
 			<app-button
 					class="control-btns__btn"
-					@click="toggleEditing"
+					@click="toggleEditingButton"
 			>
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
 			<app-button
 					variant="delete"
 					class="control-btns__btn"
-					@click="deleteTask(task)"
+					@click="deleteTaskButton"
 			>
 				<img src="../assets/delete.svg" alt="Delete">
 			</app-button>
@@ -89,7 +89,7 @@ export default {
 			this.clearEditableTask();
 			this.toggleTaskStatus(this.task);
 		},
-		toggleEditing() {
+		toggleEditingButton() {
 			if (this.editableTask === this.task.id) {
 				this.clearEditableTask();
 			} else {
@@ -99,6 +99,10 @@ export default {
 					this.$refs.editInput.$el.focus();
 				});
 			}
+		},
+		deleteTaskButton() {
+			this.clearEditableTask();
+			this.deleteTask(this.task);
 		}
 	}
 }
