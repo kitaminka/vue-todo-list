@@ -26,7 +26,7 @@
 			</app-button>
 			<app-button
 					class="control-btns__btn"
-					@click="toggleEditingButton"
+					@click="toggleEditing"
 			>
 				<img src="../assets/edit.svg" alt="Edit">
 			</app-button>
@@ -89,7 +89,7 @@ export default {
 			this.clearEditableTask();
 			this.toggleTaskStatus(this.task);
 		},
-		toggleEditingButton() {
+		toggleEditing() {
 			if (this.editableTask === this.task.id) {
 				this.clearEditableTask();
 			} else {
