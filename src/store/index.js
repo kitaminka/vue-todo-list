@@ -2,13 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    tasks: [
-      {
-        id: 1,
-        description: 'asdasdas',
-        completed: true
-      }
-    ],
+    tasks: [],
     editableTask: null
   },
   getters: {
