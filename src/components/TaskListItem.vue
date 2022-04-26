@@ -69,6 +69,7 @@ export default {
 				return this.task.completed;
 			},
 			set(newValue) {
+				this.clearEditableTask();
 				this.setTaskStatus({
 					task: this.task,
 					completed: newValue
