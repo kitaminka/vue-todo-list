@@ -7,7 +7,6 @@ import fs from 'fs';
         // eslint-disable-next-line no-console
         console.log("Building started...");
         await execa("yarn", ["build"]);
-        // Understand if it's dist or build folder
         const folderName = fs.existsSync("dist") ? "dist" : "build";
         await execa("git", ["--work-tree", folderName, "add", "--all"]);
         await execa("git", ["--work-tree", folderName, "commit", "-m", "gh-pages"]);

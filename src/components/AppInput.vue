@@ -11,10 +11,7 @@
 export default {
 	name: 'AppInput',
 	props: {
-		modelValue: {
-			type: [String, Number],
-			default: ''
-		}
+		modelValue: String
 	},
 	methods: {
 		updateInput(event) {

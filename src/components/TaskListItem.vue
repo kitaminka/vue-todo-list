@@ -1,6 +1,9 @@
 <template>
   <div class="list-item">
-		<!--	TODO Add checkbox for completing task   -->
+		<app-checkbox
+				class="list-item__checkbox"
+				v-model="taskCompleted"
+		/>
 		<app-input
 				ref="editInput"
 				class="list-item__input"
@@ -12,18 +15,11 @@
 		<div
 				v-else
 				class="list-item__description"
-				:class="{completed: task.completed}"
+				:class="{completed: taskCompleted}"
 		>
 			{{task.description}}
 		</div>
 		<div class="list-item__control-btns">
-			<app-button
-					@click="toggleStatusButton"
-					variant="success"
-					class="control-btns__btn"
-			>
-				<img src="../assets/complete.svg" alt="Complete">
-			</app-button>
 			<app-button
 					class="control-btns__btn"
 					@click="toggleEditing"
@@ -46,10 +42,12 @@ import AppButton from '@/components/AppButton';
 import { mapActions, mapGetters } from 'vuex';
 import { nextTick } from 'vue';
 import AppInput from '@/components/AppInput';
+import AppCheckbox from '@/components/AppCheckbox';
 
 export default {
   name: 'TaskListItem',
 	components: {
+		AppCheckbox,
 		AppInput,
 		AppButton
 	},
@@ -65,12 +63,23 @@ export default {
 	computed: {
 		...mapGetters({
 			editableTask: 'getEditableTask'
-		})
+		}),
+		taskCompleted: {
+			get() {
+				return this.task.completed;
+			},
+			set(newValue) {
+				this.setTaskStatus({
+					task: this.task,
+					completed: newValue
+				});
+			}
+		}
 	},
 	watch: {
 		inputDescription(newInputDescription) {
 			if (newInputDescription.length > 0) {
-				this.editTaskDescription({
+				this.setTaskDescription({
 					task: this.task,
 					description: this.inputDescription
 				});
@@ -79,16 +88,12 @@ export default {
 	},
 	methods: {
 		...mapActions({
-			editTaskDescription: 'editTaskDescription',
-			toggleTaskStatus: 'toggleTaskStatus',
+			setTaskDescription: 'setTaskDescription',
+			setTaskStatus: 'setTaskStatus',
 			deleteTask: 'deleteTask',
 			setEditableTask: 'setEditableTask',
 			clearEditableTask: 'clearEditableTask'
 		}),
-		toggleStatusButton() {
-			this.clearEditableTask();
-			this.toggleTaskStatus(this.task);
-		},
 		toggleEditing() {
 			if (this.editableTask === this.task.id) {
 				this.clearEditableTask();
@@ -118,8 +123,11 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
+.list-item__checkbox {
+	margin: 5px;
+}
 .list-item__input {
-	width: 100%;
+	width: 80%;
 	font-size: 16px;
 }
 .list-item__description {
@@ -130,8 +138,7 @@ export default {
 	color: green;
 }
 .list-item__control-btns{
-	width: 10%;
-	min-width: 150px;
+	width: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;

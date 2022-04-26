@@ -2,7 +2,13 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    tasks: [],
+    tasks: [
+      {
+        id: 1,
+        description: 'asdasdas',
+        completed: true
+      }
+    ],
     editableTask: null
   },
   getters: {
@@ -17,10 +23,10 @@ export default createStore({
     createTask(state, task) {
       state.tasks.push(task);
     },
-    editTaskDescription(state, {task, description}) {
+    setTaskDescription(state, {task, description}) {
       state.tasks.find((t) => t.id === task.id).description = description;
     },
-    changeTaskStatus(state, {task, completed}) {
+    setTaskStatus(state, {task, completed}) {
       state.tasks.find((t) => t.id === task.id).completed = completed;
     },
     deleteTask(state, task) {
@@ -37,21 +43,14 @@ export default createStore({
     createTask({commit}, task) {
       commit('createTask', task);
     },
-    editTaskDescription({commit}, {task, description}) {
-      commit('editTaskDescription', {task, description});
+    setTaskDescription({commit}, {task, description}) {
+      commit('setTaskDescription', {task, description});
     },
-    toggleTaskStatus({commit}, task) {
-      if (task.completed) {
-        commit('changeTaskStatus', {
-          task,
-          completed: false
-        });
-      } else {
-        commit('changeTaskStatus', {
-          task,
-          completed: true
-        });
-      }
+    setTaskStatus({commit}, {task, completed}) {
+      commit('setTaskStatus', {
+        task,
+        completed
+      });
     },
     deleteTask({commit}, task) {
       commit('deleteTask', task);
