@@ -15,7 +15,6 @@
 		<div
 				v-else
 				class="list-item__description"
-				:class="{completed: taskCompleted}"
 		>
 			{{task.description}}
 		</div>
@@ -133,25 +132,25 @@ export default {
 }
 .list-item__description {
 	color: #002493;
+	word-wrap: break-word;
+	max-width: 80%;
 	text-align: left;
 }
-.completed {
-	color: green;
-}
 .list-item__control-btns{
-	width: 100px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 .control-btns__btn {
+	width: 40px;
+	height: 40px;
+	padding: 0;
 	margin: 5px;
 }
 
 @media (max-width: 900px) {
-	.list-item {
-		margin: 20px 10px;
-		flex-direction: column;
+	.list-item__description {
+		max-width: 50%;
 	}
 }
 </style>

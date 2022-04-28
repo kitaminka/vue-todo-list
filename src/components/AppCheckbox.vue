@@ -19,8 +19,8 @@ export default {
 <style scoped>
 
 .checkbox {
-	width: 30px;
-	height: 30px;
+	min-width: 30px;
+	min-height: 30px;
 	border: 2px #002493 solid;
 	border-radius: 5px;
 	user-select: none;
