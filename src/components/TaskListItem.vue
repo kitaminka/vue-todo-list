@@ -16,7 +16,7 @@
 				v-else
 				class="list-item__description"
 		>
-			{{task.description}}
+			{{shortDescription}}
 		</div>
 		<div class="list-item__control-btns">
 			<app-button
@@ -74,6 +74,10 @@ export default {
 					completed: newValue
 				});
 			}
+		},
+		shortDescription() {
+			if (this.task.description.length > 150) return `${this.task.description.slice(0, 150)}...`;
+			else return this.task.description;
 		}
 	},
 	watch: {
