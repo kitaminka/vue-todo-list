@@ -1,39 +1,39 @@
 <template>
-  <div class="list-item">
+	<div class="list-item">
 		<app-checkbox
-				class="list-item__checkbox"
-				v-model="taskCompleted"
+			v-model="taskCompleted"
+			class="list-item__checkbox"
 		/>
 		<app-input
-				ref="editInput"
-				class="list-item__input"
-				v-if="editableTask === task.id"
-				v-model="inputDescription"
-				@keydown.enter="toggleEditing"
-				placeholder="Task description"
+			v-if="editableTask === task.id"
+			ref="editInput"
+			v-model="inputDescription"
+			class="list-item__input"
+			placeholder="Task description"
+			@keydown.enter="toggleEditing"
 		/>
 		<div
-				v-else
-				class="list-item__description"
+			v-else
+			class="list-item__description"
 		>
-			{{shortDescription}}
+			{{ shortDescription }}
 		</div>
 		<div class="list-item__control-btns">
 			<app-button
-					class="control-btns__btn"
-					@click="toggleEditing"
+				class="control-btns__btn"
+				@click="toggleEditing"
 			>
-				<img src="../assets/edit.svg" alt="Edit">
+				<img alt="Edit" src="../assets/edit.svg">
 			</app-button>
 			<app-button
-					variant="delete"
-					class="control-btns__btn"
-					@click="deleteTaskButton"
+				class="control-btns__btn"
+				variant="delete"
+				@click="deleteTaskButton"
 			>
-				<img src="../assets/delete.svg" alt="Delete">
+				<img alt="Delete" src="../assets/delete.svg">
 			</app-button>
 		</div>
-  </div>
+	</div>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ import AppInput from '@/components/AppInput';
 import AppCheckbox from '@/components/AppCheckbox';
 
 export default {
-  name: 'TaskListItem',
+	name: 'TaskListItem',
 	components: {
 		AppCheckbox,
 		AppInput,
@@ -56,9 +56,9 @@ export default {
 			inputDescription: this.task.description
 		}
 	},
-  props: {
-    task: Object
-  },
+	props: {
+		task: Object
+	},
 	computed: {
 		...mapGetters({
 			editableTask: 'getEditableTask'
@@ -127,24 +127,29 @@ export default {
 	align-items: center;
 	justify-content: space-between;
 }
+
 .list-item__checkbox {
 	margin: 5px;
 }
+
 .list-item__input {
 	width: 80%;
 	font-size: 16px;
 }
+
 .list-item__description {
 	color: #002493;
 	word-wrap: break-word;
 	max-width: 80%;
 	text-align: left;
 }
-.list-item__control-btns{
+
+.list-item__control-btns {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
+
 .control-btns__btn {
 	width: 40px;
 	height: 40px;
