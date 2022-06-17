@@ -1,24 +1,24 @@
 # vue-todo-list
-
-## Project setup
+📝**To-Do list application** using Vuex store
+___
+### Installation
+- Clone the repository:
+```bash
+git clone https://github.com/kitaminka/vue-todo-list.git
 ```
+- Install dependencies:
+```bash
 yarn install
 ```
-
-### Compiles and hot-reloads for development
-```
+- Start the program in development mode:
+```bash
 yarn serve
 ```
-
-### Compiles and minifies for production
+- Compile for production:
 ```
 yarn build
 ```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+___
+### Screenshots
+![Screenshot](https://i.imgur.com/HKd2yaW.png])
+___
