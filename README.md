@@ -1,5 +1,5 @@
 # vue-todo-list
-📝**To-Do list application** using Vuex store
+**To-Do list application** using Vuex store.
 ___
 ### Installation
 - Clone the repository:
